@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Release {
+  id             Int      @id @default(autoincrement())
+  name           String
+  releaseDate    DateTime @map("release_date")
+  additionalInfo String?  @map("additional_info")
+  completedSteps Json     @default("[]") @map("completed_steps")
+
+  @@map("releases")
+}
