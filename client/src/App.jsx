@@ -18,7 +18,7 @@ export default function App() {
   }
 
   const handleCreate = async (releaseData) => {
-    const res = await fetch("http://localhost:3000/api/releases", {
+    const res = await fetch(import.meta.env.VITE_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(releaseData)

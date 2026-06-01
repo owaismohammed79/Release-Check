@@ -21,7 +21,7 @@ export default function ReleaseItem({ release, onUpdate, onDelete }) {
       : [...release.completedSteps, stepId];
 
     const res = await fetch(
-      `http://localhost:3000/api/releases/${release.id}/steps`,
+      `${import.meta.env.VITE_API_URL}/${release.id}/steps`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -37,7 +37,7 @@ export default function ReleaseItem({ release, onUpdate, onDelete }) {
 
   const handleInfoSave = async () => {
     const res = await fetch(
-      `http://localhost:3000/api/releases/${release.id}/info`,
+      `${import.meta.env.VITE_API_URL}/${release.id}/info`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
