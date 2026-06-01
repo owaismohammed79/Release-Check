@@ -10,7 +10,7 @@ export default function App() {
   }, [])
 
   const fetchReleases = async () => {
-    const res = await fetch("http://localhost:3000/api/releases")
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/releases`)
     if (res.ok) {
       const data = await res.json()
       setReleases(data)
@@ -18,7 +18,7 @@ export default function App() {
   }
 
   const handleCreate = async (releaseData) => {
-    const res = await fetch(import.meta.env.VITE_API_URL, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/releases`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(releaseData)
@@ -35,7 +35,7 @@ export default function App() {
   }
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:3000/api/releases/${id}`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/releases/${id}`, {
       method: 'DELETE'
     })
     
