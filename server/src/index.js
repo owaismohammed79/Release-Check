@@ -35,7 +35,7 @@ app.get("/api/releases", async (req, res) => {
 
     res.json(releases)
   } catch (err) {
-    res.status(500).json({ error: "Server error" })
+    res.status(500).json({ error: "Server error", details: err.message })
   }
 })
 
@@ -58,7 +58,7 @@ app.post("/api/releases", async (req, res) => {
 
     res.status(201).json(responseData)
   } catch (err) {
-    res.status(500).json({ error: "Server error" })
+    res.status(500).json({ error: "Server error", details: err.message })
   }
 })
 
@@ -79,7 +79,7 @@ app.put("/api/releases/:id/steps", async (req, res) => {
 
     res.json(responseData)
   } catch (err) {
-    res.status(500).json({ error: "Server error" })
+    res.status(500).json({ error: "Server error", details: err.message })
   }
 })
 
@@ -100,7 +100,7 @@ app.put("/api/releases/:id/info", async (req, res) => {
 
     res.json(responseData)
   } catch (err) {
-    res.status(500).json({ error: "Server error" })
+    res.status(500).json({ error: "Server error", details: err.message })
   }
 })
 
@@ -112,7 +112,7 @@ app.delete("/api/releases/:id", async (req, res) => {
     })
     res.status(204).send()
   } catch (err) {
-    res.status(500).json({ error: "Server error" })
+    res.status(500).json({ error: "Server error", details: err.message })
   }
 })
 

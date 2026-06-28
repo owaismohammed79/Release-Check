@@ -6,10 +6,7 @@ export default function App() {
   const [releases, setReleases] = useState([])
 
   useEffect(() => {
-    fetchReleases()
-  }, [])
-
-  const fetchReleases = async () => {
+    const fetchReleases = async () => {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/releases`)
     if (res.ok) {
       const data = await res.json()
@@ -17,16 +14,23 @@ export default function App() {
     }
   }
 
+    fetchReleases()
+  }, [])
+
   const handleCreate = async (releaseData) => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/releases`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(releaseData)
-    });
-    
-    if (res.ok) {
-      const newRelease = await res.json();
-      setReleases(prevReleases => [...prevReleases, newRelease]);
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/releases`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(releaseData)
+      });
+
+      if (res.ok) {
+        const newRelease = await res.json();
+        setReleases(prevReleases => [...prevReleases, newRelease]);
+      }
+    } catch (error) {
+      console.log('ERROR', error)
     }
   };
 
@@ -35,12 +39,16 @@ export default function App() {
   }
 
   const handleDelete = async (id) => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/releases/${id}`, {
-      method: 'DELETE'
-    })
-    
-    if (res.ok) {
-      setReleases(releases.filter(r => r.id !== id))
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/releases/${id}`, {
+        method: 'DELETE'
+      })
+      
+      if (res.ok) {
+        setReleases(releases.filter(r => r.id !== id))
+      }
+    } catch (error) {
+      console.log("Error in deleting", error)
     }
   }
 
